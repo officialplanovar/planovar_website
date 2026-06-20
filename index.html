@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planovar — Plan Better. Celebrate Bigger.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f7f5f2;
+  --white: #ffffff;
+  --ink: #141212;
+  --ink-2: #2a2626;
+  --muted: #8a8480;
+  --muted-2: #c4c0bc;
+  --accent: #7b5cf0;
+  --accent-light: #ede9fe;
+  --accent-mid: #a78bfa;
+  --gold: #d4a63a;
+  --border: #e8e4e0;
+  --border-strong: #d0ccc8;
+  --radius: 18px;
+  --radius-sm: 12px;
+  --radius-pill: 999px;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Instrument Sans', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 2.5rem;
+  background: rgba(247,245,242,0.88);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: padding 0.3s;
+}
+
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+
+.logo-mark {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: linear-gradient(135deg, #9b7ff8, #5ba3ff);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-weight: 700; font-size: 17px; color: white;
+}
+
+.logo-text {
+  font-family: 'Fraunces', serif;
+  font-weight: 600; font-size: 17px;
+  color: var(--ink); letter-spacing: -0.02em;
+}
+.logo-text em { font-style: normal; color: var(--accent); }
+
+.nav-right { display: flex; align-items: center; gap: 2rem; }
+
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-size: 14px; color: var(--muted);
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+
+.nav-btn {
+  padding: 0.5rem 1.25rem;
+  background: var(--ink); color: white;
+  border: none; border-radius: var(--radius-pill);
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 13px; font-weight: 500;
+  cursor: pointer; text-decoration: none;
+  transition: opacity 0.2s;
+}
+.nav-btn:hover { opacity: 0.82; }
+
+.menu-btn {
+  display: none;
+  width: 40px; height: 40px;
+  border-radius: 50%; background: white;
+  border: 1px solid var(--border);
+  align-items: center; justify-content: center;
+  cursor: pointer; flex-direction: column; gap: 5px;
+}
+.menu-btn span { display: block; width: 16px; height: 1.5px; background: var(--ink); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center;
+  padding: 9rem 2rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle map/world texture bg */
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 60%, rgba(123,92,240,0.06) 0%, transparent 70%);
+}
+
+/* Floating category pills - animated */
+.pill-orbit {
+  position: absolute; inset: 0; z-index: 0;
+  pointer-events: none;
+}
+
+.pill {
+  position: absolute;
+  display: flex; align-items: center; gap: 7px;
+  padding: 8px 14px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  font-size: 12px; font-weight: 500; color: var(--ink-2);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  white-space: nowrap;
+}
+.pill-icon { font-size: 14px; }
+
+.pill-1  { top: 18%; left: 6%;  animation: floatA 7s ease-in-out infinite; }
+.pill-2  { top: 28%; right: 5%; animation: floatB 9s ease-in-out infinite 1s; }
+.pill-3  { top: 50%; left: 3%;  animation: floatA 8s ease-in-out infinite 2s; }
+.pill-4  { top: 62%; right: 4%; animation: floatB 7s ease-in-out infinite 0.5s; }
+.pill-5  { top: 78%; left: 8%;  animation: floatA 9s ease-in-out infinite 3s; }
+.pill-6  { top: 75%; right: 7%; animation: floatB 8s ease-in-out infinite 1.5s; }
+
+@keyframes floatA { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+@keyframes floatB { 0%,100%{transform:translateY(0)} 50%{transform:translateY(10px)} }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 1.75rem; position: relative; z-index: 1;
+}
+.eyebrow-dot {
+  width: 6px; height: 6px; background: var(--accent);
+  border-radius: 50%; animation: blink 2s ease infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.hero-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(3.2rem, 8vw, 6.5rem);
+  font-weight: 600; line-height: 1.0;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+  position: relative; z-index: 1;
+  max-width: 800px;
+}
+
+.hero-title em {
+  font-style: italic; font-weight: 300;
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 480px;
+  margin-bottom: 3rem;
+  position: relative; z-index: 1;
+  font-weight: 400;
+}
+
+.hero-actions {
+  display: flex; gap: 12px; align-items: center;
+  position: relative; z-index: 1;
+  flex-wrap: wrap; justify-content: center;
+}
+
+.btn-dark {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 0.9rem 2rem;
+  background: var(--ink); color: white;
+  border-radius: var(--radius-pill);
+  font-size: 15px; font-weight: 500;
+  text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.btn-dark:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
+
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 0.9rem 2rem;
+  background: transparent; color: var(--ink-2);
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  font-size: 15px; font-weight: 500;
+  text-decoration: none; transition: all 0.2s;
+}
+.btn-outline:hover { border-color: var(--ink); }
+
+/* ── TRUST BAR ── */
+.trust-bar {
+  background: white;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 2.5rem 3rem;
+  display: flex; justify-content: center;
+  gap: 0;
+}
+
+.trust-item {
+  flex: 1; max-width: 220px;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 4px;
+  padding: 0 2rem;
+  border-right: 1px solid var(--border);
+}
+.trust-item:last-child { border-right: none; }
+
+.trust-num {
+  font-family: 'Fraunces', serif;
+  font-size: 2.4rem; font-weight: 600;
+  letter-spacing: -0.04em; color: var(--ink);
+  line-height: 1;
+}
+.trust-label {
+  font-size: 12px; color: var(--muted);
+  letter-spacing: 0.04em; text-align: center;
+}
+
+/* ── SECTION WRAPPER ── */
+.section { padding: 7rem 2.5rem; max-width: 1100px; margin: 0 auto; }
+.section-full { padding: 7rem 0; }
+
+.section-label {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.section-label::before {
+  content: ''; width: 18px; height: 1px; background: var(--accent);
+}
+
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 600; letter-spacing: -0.03em;
+  line-height: 1.1; color: var(--ink);
+  margin-bottom: 1rem;
+}
+.section-title em { font-style: italic; font-weight: 300; color: var(--accent); }
+
+.section-body {
+  font-size: 1rem; color: var(--muted);
+  line-height: 1.85; font-weight: 400;
+  max-width: 460px;
+}
+
+/* ── HOW IT WORKS ── */
+.how-wrapper {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6rem; align-items: center;
+}
+
+.steps { display: flex; flex-direction: column; gap: 0; margin-top: 2.5rem; }
+
+.step {
+  display: flex; gap: 1.5rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  transition: padding-left 0.3s;
+  cursor: default;
+}
+.step:last-child { border-bottom: none; }
+.step:hover { padding-left: 0.5rem; }
+
+.step-n {
+  font-family: 'Fraunces', serif;
+  font-size: 11px; font-weight: 600;
+  color: var(--muted-2); letter-spacing: 0.05em;
+  padding-top: 5px; min-width: 24px;
+}
+
+.step h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.05rem; font-weight: 600;
+  color: var(--ink); margin-bottom: 5px;
+  letter-spacing: -0.01em;
+}
+.step p { font-size: 0.88rem; color: var(--muted); line-height: 1.75; }
+
+/* Phone visual */
+.phone-wrap {
+  display: flex; justify-content: center;
+  position: relative;
+}
+
+.phone {
+  width: 230px; height: 460px;
+  background: var(--ink);
+  border-radius: 36px;
+  border: 8px solid #1e1c1c;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.18), 0 0 0 1px rgba(255,255,255,0.06);
+  overflow: hidden;
+  position: relative;
+}
+
+.phone-inner {
+  width: 100%; height: 100%;
+  background: #f7f5f2;
+  display: flex; flex-direction: column;
+  padding: 14px 12px 12px;
+}
+
+.p-topbar {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-bottom: 12px;
+}
+.p-logo-small {
+  font-family: 'Fraunces', serif;
+  font-size: 11px; font-weight: 700; color: var(--ink);
+}
+.p-logo-small em { font-style: normal; color: var(--accent); }
+
+.p-search {
+  display: flex; align-items: center; gap: 6px;
+  background: white; border: 1px solid var(--border);
+  border-radius: 10px; padding: 7px 10px;
+  margin-bottom: 10px;
+}
+.p-search-ico { font-size: 11px; color: var(--muted); }
+.p-search-txt { font-size: 9px; color: var(--muted); }
+
+.p-chips {
+  display: flex; gap: 5px; margin-bottom: 10px; overflow: hidden;
+}
+.p-chip {
+  padding: 3px 9px; border-radius: 20px;
+  font-size: 8px; font-weight: 600; white-space: nowrap;
+  background: var(--border); color: var(--muted);
+}
+.p-chip.on {
+  background: var(--accent); color: white;
+}
+
+.p-cards { display: flex; flex-direction: column; gap: 7px; }
+
+.p-card {
+  display: flex; align-items: center; gap: 8px;
+  background: white; border: 1px solid var(--border);
+  border-radius: 10px; padding: 8px 9px;
+}
+
+.p-ava {
+  width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: white;
+  flex-shrink: 0;
+  font-family: 'Fraunces', serif;
+}
+.pa1 { background: linear-gradient(135deg, #9b59b6, #6c5ce7); }
+.pa2 { background: linear-gradient(135deg, #e17055, #d63031); }
+.pa3 { background: linear-gradient(135deg, #00b894, #00cec9); }
+
+.p-info h6 { font-size: 8.5px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+.p-info p  { font-size: 7.5px; color: var(--muted); }
+.p-star { margin-left: auto; font-size: 7px; color: var(--gold); letter-spacing: -1px; }
+
+/* badge floaters beside phone */
+.phone-badge {
+  position: absolute;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px 14px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+.pb-1 { top: 30px; right: -10px; }
+.pb-2 { bottom: 50px; left: -20px; }
+.pb-label { font-size: 9px; color: var(--muted); margin-bottom: 3px; }
+.pb-val { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 700; color: var(--ink); line-height: 1; }
+.pb-sub { font-size: 8px; color: var(--accent); margin-top: 2px; font-weight: 600; }
+
+/* ── CATEGORIES ── */
+.cats-bg { background: white; }
+
+.cats-header {
+  display: flex; justify-content: space-between;
+  align-items: flex-end; margin-bottom: 3rem;
+}
+
+.cats-link {
+  font-size: 13px; color: var(--muted); text-decoration: none;
+  border-bottom: 1px solid var(--border); padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.cats-link:hover { color: var(--ink); border-color: var(--ink); }
+
+.cats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.cat-tile {
+  background: white;
+  padding: 2rem 1.75rem;
+  display: flex; flex-direction: column; gap: 0.75rem;
+  cursor: pointer; transition: background 0.25s;
+  position: relative; overflow: hidden;
+}
+.cat-tile:hover { background: var(--bg); }
+
+.cat-ico-wrap {
+  width: 44px; height: 44px;
+  background: var(--accent-light);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+
+.cat-tile-name {
+  font-family: 'Fraunces', serif;
+  font-size: 0.95rem; font-weight: 600;
+  color: var(--ink); letter-spacing: -0.01em;
+}
+
+.cat-tile-count {
+  font-size: 11px; color: var(--muted);
+}
+
+.cat-tile-arrow {
+  position: absolute; right: 1.25rem; bottom: 1.25rem;
+  font-size: 14px; color: var(--muted-2);
+  opacity: 0; transform: translate(-4px, 4px);
+  transition: all 0.25s;
+}
+.cat-tile:hover .cat-tile-arrow { opacity: 1; transform: translate(0,0); }
+
+/* ── FEATURE CARDS ── */
+.feat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3.5rem;
+}
+
+.feat-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+.feat-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.08); transform: translateY(-3px); }
+.feat-card.accent-bg { background: var(--accent); color: white; }
+.feat-card.accent-bg .feat-icon-wrap { background: rgba(255,255,255,0.15); }
+.feat-card.accent-bg h3 { color: white; }
+.feat-card.accent-bg p { color: rgba(255,255,255,0.72); }
+
+.feat-icon-wrap {
+  width: 46px; height: 46px;
+  background: var(--bg);
+  border-radius: 13px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; margin-bottom: 1.25rem;
+}
+
+.feat-card h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 1rem; font-weight: 600;
+  color: var(--ink); margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.feat-card p { font-size: 0.86rem; color: var(--muted); line-height: 1.75; }
+
+/* ── VENDOR JOIN ── */
+.vendor-section {
+  background: var(--ink); color: white;
+  border-radius: 28px;
+  margin: 0 2.5rem;
+  padding: 5rem 5rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center;
+  position: relative; overflow: hidden;
+}
+
+.vendor-section::before {
+  content: '';
+  position: absolute; top: -80px; right: -80px;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(123,92,240,0.25) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.vendor-section .section-label { color: var(--accent-mid); }
+.vendor-section .section-label::before { background: var(--accent-mid); }
+.vendor-section .section-title { color: white; }
+.vendor-section .section-title em { color: var(--accent-mid); }
+.vendor-section .section-body { color: rgba(255,255,255,0.5); max-width: none; }
+
+.vendor-steps {
+  display: flex; flex-direction: column; gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.vendor-step {
+  display: flex; gap: 1rem; align-items: flex-start;
+}
+
+.vs-num {
+  width: 28px; height: 28px; flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 600; color: var(--accent-mid);
+  margin-top: 2px;
+}
+
+.vendor-step h5 {
+  font-family: 'Fraunces', serif;
+  font-size: 0.95rem; font-weight: 600;
+  color: white; margin-bottom: 3px; letter-spacing: -0.01em;
+}
+.vendor-step p { font-size: 0.82rem; color: rgba(255,255,255,0.42); line-height: 1.7; }
+
+.vendor-visual {
+  display: flex; flex-direction: column; gap: 12px;
+}
+
+.dash-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px; padding: 1.25rem 1.5rem;
+}
+
+.dash-card-label {
+  font-size: 10px; color: rgba(255,255,255,0.35);
+  letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px;
+}
+.dash-card-val {
+  font-family: 'Fraunces', serif;
+  font-size: 1.6rem; font-weight: 600; color: white;
+  line-height: 1; margin-bottom: 4px;
+}
+.dash-card-change {
+  font-size: 11px; color: #6ee7b7; font-weight: 500;
+}
+
+.dash-bar-row {
+  display: flex; flex-direction: column; gap: 10px; margin-top: 4px;
+}
+.dash-bar-item { display: flex; flex-direction: column; gap: 4px; }
+.dash-bar-label { font-size: 10px; color: rgba(255,255,255,0.35); }
+.dash-bar-track {
+  height: 4px; background: rgba(255,255,255,0.08);
+  border-radius: 2px; overflow: hidden;
+}
+.dash-bar-fill { height: 100%; border-radius: 2px; }
+.fill-purple { background: var(--accent-mid); }
+.fill-blue   { background: #60a5fa; }
+.fill-green  { background: #34d399; }
+
+/* ── FAQ ── */
+.faq-list { display: flex; flex-direction: column; gap: 0; margin-top: 3rem; }
+
+.faq-item {
+  border-bottom: 1px solid var(--border); overflow: hidden;
+}
+
+.faq-q {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; padding: 1.5rem 0;
+  cursor: pointer; transition: color 0.2s;
+}
+.faq-q:hover h4 { color: var(--accent); }
+
+.faq-q h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 1rem; font-weight: 600; color: var(--ink);
+  letter-spacing: -0.01em; transition: color 0.2s;
+}
+
+.faq-ico {
+  width: 28px; height: 28px; flex-shrink: 0;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: var(--muted);
+  transition: all 0.3s; font-weight: 300;
+}
+
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s;
+  font-size: 0.9rem; color: var(--muted); line-height: 1.8;
+  padding: 0;
+}
+
+.faq-item.open .faq-a { max-height: 200px; padding-bottom: 1.5rem; }
+.faq-item.open .faq-ico { background: var(--accent); border-color: var(--accent); color: white; transform: rotate(45deg); }
+
+/* ── APP DOWNLOAD ── */
+.app-section {
+  text-align: center; padding: 7rem 2rem;
+}
+
+.app-section .section-label { justify-content: center; }
+.app-section .section-title { text-align: center; margin: 0 auto 1rem; }
+.app-section .section-body { text-align: center; margin: 0 auto 2.5rem; }
+
+.app-btns {
+  display: flex; gap: 14px;
+  justify-content: center; flex-wrap: wrap;
+}
+
+.app-btn {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 22px;
+  background: white; border: 1.5px solid var(--border-strong);
+  border-radius: 16px; text-decoration: none;
+  transition: all 0.25s; min-width: 180px;
+}
+.app-btn:hover { border-color: var(--ink); box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
+
+.app-btn-icon { font-size: 26px; line-height: 1; }
+
+.app-btn-text-small {
+  font-size: 10px; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  display: block;
+}
+.app-btn-text-big {
+  font-family: 'Fraunces', serif;
+  font-size: 16px; font-weight: 600; color: var(--ink);
+  display: block; letter-spacing: -0.01em;
+}
+
+.app-screens {
+  display: flex; gap: 1.5rem;
+  justify-content: center; align-items: flex-end;
+  margin-top: 4rem;
+}
+
+.mock-screen {
+  background: var(--ink);
+  border-radius: 28px;
+  overflow: hidden;
+  border: 6px solid #1a1818;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+}
+.ms-main { width: 170px; height: 320px; }
+.ms-side { width: 140px; height: 260px; transform: translateY(30px); opacity: 0.7; }
+
+.ms-inner {
+  width: 100%; height: 100%;
+  background: #12112a;
+  padding: 14px 10px;
+}
+
+.ms-bar {
+  height: 3px; background: rgba(255,255,255,0.07);
+  border-radius: 2px; margin-bottom: 10px;
+}
+.ms-avatar-row {
+  display: flex; gap: 6px; margin-bottom: 10px;
+}
+.ms-av {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), #60a5fa);
+  flex-shrink: 0;
+}
+.ms-av-info { flex: 1; }
+.ms-av-name { height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; margin-bottom: 4px; width: 70%; }
+.ms-av-sub  { height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; width: 50%; }
+
+.ms-card-mock {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px; padding: 8px;
+  margin-bottom: 6px;
+}
+.ms-card-line { height: 5px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 4px; }
+.ms-card-line.short { width: 60%; }
+.ms-card-line.shorter { width: 40%; background: rgba(123,92,240,0.4); }
+
+/* ── FOOTER ── */
+footer {
+  background: white;
+  border-top: 1px solid var(--border);
+  padding: 4rem 2.5rem 2.5rem;
+}
+
+.footer-top {
+  display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr;
+  gap: 4rem; max-width: 1100px; margin: 0 auto 3rem;
+}
+
+.footer-brand p {
+  font-size: 0.87rem; color: var(--muted);
+  line-height: 1.8; margin: 0.85rem 0 1.5rem;
+  max-width: 240px;
+}
+
+.footer-col h6 {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink); margin-bottom: 1.25rem;
+}
+
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+.footer-col a {
+  font-size: 0.875rem; color: var(--muted);
+  text-decoration: none; transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--ink); }
+
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 2rem; max-width: 1100px; margin: 0 auto;
+  display: flex; justify-content: space-between;
+  align-items: center;
+}
+.footer-copy { font-size: 12px; color: var(--muted-2); }
+
+.footer-legal { display: flex; gap: 1.5rem; }
+.footer-legal a { font-size: 12px; color: var(--muted-2); text-decoration: none; }
+.footer-legal a:hover { color: var(--muted); }
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.25rem; }
+  .nav-links { display: none; }
+  .nav-btn { display: none; }
+  .menu-btn { display: flex; }
+
+  .hero { padding: 8rem 1.5rem 5rem; }
+  .pill-1,.pill-3,.pill-5 { left: -10px; opacity: 0.5; }
+  .pill-2,.pill-4,.pill-6 { right: -10px; opacity: 0.5; }
+
+  .section { padding: 4.5rem 1.5rem; }
+
+  .how-wrapper { grid-template-columns: 1fr; gap: 3rem; }
+  .phone-wrap { order: -1; }
+
+  .cats-grid { grid-template-columns: repeat(2, 1fr); }
+  .cats-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+
+  .feat-grid { grid-template-columns: 1fr; }
+
+  .vendor-section { grid-template-columns: 1fr; padding: 3rem 2rem; margin: 0 1.25rem; gap: 3rem; }
+
+  .trust-bar { padding: 2rem 1.5rem; gap: 0; overflow-x: auto; }
+  .trust-item { min-width: 120px; }
+
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">
+    <div class="logo-mark">P</div>
+    <span class="logo-text">Plan<em>ovar</em></span>
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#categories">Categories</a></li>
+      <li><a href="#vendors">For Vendors</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="#app" class="nav-btn">Download App</a>
+  </div>
+  <div class="menu-btn" id="menuBtn">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <!-- Floating category pills -->
+  <div class="pill-orbit">
+    <div class="pill pill-1"><span class="pill-icon">🎊</span> Event Planners</div>
+    <div class="pill pill-2"><span class="pill-icon">📸</span> Photographers</div>
+    <div class="pill pill-3"><span class="pill-icon">🍽️</span> Catering</div>
+    <div class="pill pill-4"><span class="pill-icon">🌸</span> Decorators</div>
+    <div class="pill pill-5"><span class="pill-icon">🎂</span> Cakes & Sweets</div>
+    <div class="pill pill-6"><span class="pill-icon">💄</span> Makeup Artists</div>
+  </div>
+
+  <div class="hero-eyebrow">
+    <span class="eyebrow-dot"></span>
+    Nigeria's Event Commerce Marketplace
+  </div>
+
+  <h1 class="hero-title">
+    Every vendor<br>
+    your event <em>deserves.</em>
+  </h1>
+
+  <p class="hero-sub">Browse verified vendors, compare portfolios, and book everything for your celebration — all in one place.</p>
+
+  <div class="hero-actions">
+    <a href="#app" class="btn-dark">
+      ↓ &nbsp; Download the App
+    </a>
+    <a href="#how" class="btn-outline">
+      See how it works
+    </a>
+  </div>
+</section>
+
+<!-- TRUST -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <span class="trust-num">2,400+</span>
+    <span class="trust-label">Verified Vendors</span>
+  </div>
+  <div class="trust-item">
+    <span class="trust-num">18K+</span>
+    <span class="trust-label">Events Powered</span>
+  </div>
+  <div class="trust-item">
+    <span class="trust-num">12</span>
+    <span class="trust-label">Service Categories</span>
+  </div>
+  <div class="trust-item">
+    <span class="trust-num">4.9★</span>
+    <span class="trust-label">Average Rating</span>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div id="how" style="background: var(--bg);">
+  <div class="section">
+    <div class="how-wrapper">
+      <div class="reveal">
+        <div class="section-label">How it works</div>
+        <h2 class="section-title">Plan your event<br>in <em>minutes.</em></h2>
+        <p class="section-body">Planovar connects you with the most trusted event professionals across Nigeria — no spreadsheets, no WhatsApp threads, no guesswork.</p>
+
+        <div class="steps">
+          <div class="step">
+            <span class="step-n">01</span>
+            <div>
+              <h4>Search & Discover</h4>
+              <p>Filter verified vendors by category, location, rating, or budget. Browse real portfolios from real events.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-n">02</span>
+            <div>
+              <h4>Compare & Connect</h4>
+              <p>Read authentic reviews, compare pricing, and message vendors directly — all within the app.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-n">03</span>
+            <div>
+              <h4>Book with Confidence</h4>
+              <p>Lock in your vendor with a structured booking request. No awkward calls, no lost messages.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-n">04</span>
+            <div>
+              <h4>Celebrate.</h4>
+              <p>Your team of professionals is confirmed. Now all you have to do is show up and enjoy.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-wrap reveal">
+        <div class="phone">
+          <div class="phone-inner">
+            <div class="p-topbar">
+              <div class="p-logo-small">Plan<em>ovar</em></div>
+              <span style="font-size:9px;color:var(--muted)">Lagos ▾</span>
+            </div>
+            <div class="p-search">
+              <span class="p-search-ico">🔍</span>
+              <span class="p-search-txt">Search vendors, services…</span>
+            </div>
+            <div class="p-chips">
+              <div class="p-chip on">All</div>
+              <div class="p-chip">Catering</div>
+              <div class="p-chip">Decor</div>
+              <div class="p-chip">Photo</div>
+            </div>
+            <div class="p-cards">
+              <div class="p-card">
+                <div class="p-ava pa1">GE</div>
+                <div class="p-info">
+                  <h6>Golden Events Co.</h6>
+                  <p>Event Planner · Lagos</p>
+                </div>
+                <div class="p-star">★★★★★</div>
+              </div>
+              <div class="p-card">
+                <div class="p-ava pa2">RL</div>
+                <div class="p-info">
+                  <h6>Royal Lights Decor</h6>
+                  <p>Decorator · Abuja</p>
+                </div>
+                <div class="p-star">★★★★★</div>
+              </div>
+              <div class="p-card">
+                <div class="p-ava pa3">SC</div>
+                <div class="p-info">
+                  <h6>Spice & Cuisine</h6>
+                  <p>Caterer · PH</p>
+                </div>
+                <div class="p-star">★★★★☆</div>
+              </div>
+              <div class="p-card" style="border-color: rgba(123,92,240,0.3);">
+                <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#d4a63a,#f0c060);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:white;font-family:'Fraunces',serif;">MB</div>
+                <div class="p-info">
+                  <h6>Mimi Bridal Studio</h6>
+                  <p>Makeup · Lagos Island</p>
+                </div>
+                <div class="p-star">★★★★★</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-badge pb-1">
+          <div class="pb-label">Bookings today</div>
+          <div class="pb-val">147</div>
+          <div class="pb-sub">↑ 24% this week</div>
+        </div>
+        <div class="phone-badge pb-2">
+          <div class="pb-label">Avg. response</div>
+          <div class="pb-val">4 min</div>
+          <div class="pb-sub">⚡ Lightning fast</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<div id="categories" class="cats-bg">
+  <div class="section">
+    <div class="cats-header reveal">
+      <div>
+        <div class="section-label">Service categories</div>
+        <h2 class="section-title">Every vendor<br>under one roof.</h2>
+      </div>
+      <a href="#app" class="cats-link">Browse all in app →</a>
+    </div>
+
+    <div class="cats-grid reveal">
+      <div class="cat-tile">
+        <div class="cat-ico-wrap">🎊</div>
+        <div class="cat-tile-name">Event Planners</div>
+        <div class="cat-tile-count">340+ vendors</div>
+        <span class="cat-tile-arrow">↗</span>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-ico-wrap">🍽️</div>
+        <div class="cat-tile-name">Catering</div>
+        <div class="cat-tile-count">420+ vendors</div>
+        <span class="cat-tile-arrow">↗</span>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-ico-wrap">🌸</div>
+        <div class="cat-tile-name">Decorators</div>
+        <div class="cat-tile-count">280+ vendors</div>
+        <span class="cat-tile-arrow">↗</span>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-ico-wrap">📸</div>
+        <div class="cat-tile-name">Photography & Video</div>
+        <div class="cat-tile-count">510+ vendors</div>
+        <span class="cat-tile-arrow">↗</span>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-ico-wrap">🎤</div>
+        <div class="cat-tile-name">MCs & Entertainers</div>
+        <div class="cat-tile-count">190+ vendors</div>
+        <span class="cat-tile-arrow">↗</span>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-ico-wrap">💄</div>
+        <div class="cat-tile-name">Makeup Artists</div>
+        <div class="cat-tile-count">365+ vendors</div>
+        <span class="cat-tile-arrow">↗</span>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-ico-wrap">🎂</div>
+        <div class="cat-tile-name">Cakes & Confectionery</div>
+        <div class="cat-tile-count">220+ vendors</div>
+        <span class="cat-tile-arrow">↗</span>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-ico-wrap">👗</div>
+        <div class="cat-tile-name">Fashion & Styling</div>
+        <div class="cat-tile-count">175+ vendors</div>
+        <span class="cat-tile-arrow">↗</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div style="background: var(--bg);">
+  <div class="section">
+    <div class="reveal">
+      <div class="section-label">Platform features</div>
+      <h2 class="section-title">Built for trust<br>and <em>simplicity.</em></h2>
+    </div>
+    <div class="feat-grid reveal">
+      <div class="feat-card accent-bg">
+        <div class="feat-icon-wrap">🔍</div>
+        <h3>Smart Discovery</h3>
+        <p>Filter by location, price, rating, and event type. Compare vendors side-by-side before a single message is sent.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon-wrap">⭐</div>
+        <h3>Verified Reviews</h3>
+        <p>Every review is tied to a real booking — no fake ratings, no paid placements. Just honest feedback.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon-wrap">💬</div>
+        <h3>In-App Messaging</h3>
+        <p>Chat directly with any vendor inside the app. No WhatsApp, no lost threads, no missed messages.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon-wrap">📍</div>
+        <h3>Location-Aware</h3>
+        <p>Search vendors by coverage area and service radius. Find the best people in your city automatically.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon-wrap">📋</div>
+        <h3>Booking Management</h3>
+        <p>Request, confirm, and track bookings without a single spreadsheet. Everything in one clear timeline.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon-wrap">🛡️</div>
+        <h3>Vendor Verification</h3>
+        <p>All vendors go through email, phone, and business verification before being listed on the platform.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VENDOR JOIN -->
+<div id="vendors" style="padding: 5rem 0; background: var(--bg);">
+  <div class="vendor-section reveal">
+    <div>
+      <div class="section-label">For vendors</div>
+      <h2 class="section-title">Grow your<br><em>event business.</em></h2>
+      <p class="section-body">Whether you're a solo photographer or an established catering company, Planovar gives you the digital tools to reach more clients and grow faster.</p>
+      <div class="vendor-steps">
+        <div class="vendor-step">
+          <span class="vs-num">1</span>
+          <div>
+            <h5>Create your profile</h5>
+            <p>Set up your business page with logo, portfolio, service categories and pricing in minutes.</p>
+          </div>
+        </div>
+        <div class="vendor-step">
+          <span class="vs-num">2</span>
+          <div>
+            <h5>Get discovered</h5>
+            <p>Appear in search results as customers browse for vendors in your city and category.</p>
+          </div>
+        </div>
+        <div class="vendor-step">
+          <span class="vs-num">3</span>
+          <div>
+            <h5>Accept bookings & grow</h5>
+            <p>Respond to requests, chat with clients, and track your performance from your dashboard.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vendor-visual">
+      <div class="dash-card">
+        <div class="dash-card-label">Profile Views This Month</div>
+        <div class="dash-card-val">3,842</div>
+        <div class="dash-card-change">↑ 34% from last month</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-card-label">Engagement Breakdown</div>
+        <div class="dash-bar-row">
+          <div class="dash-bar-item">
+            <div class="dash-bar-label">Booking requests</div>
+            <div class="dash-bar-track"><div class="dash-bar-fill fill-purple" style="width:72%"></div></div>
+          </div>
+          <div class="dash-bar-item">
+            <div class="dash-bar-label">Chat messages</div>
+            <div class="dash-bar-track"><div class="dash-bar-fill fill-blue" style="width:55%"></div></div>
+          </div>
+          <div class="dash-bar-item">
+            <div class="dash-bar-label">Repeat clients</div>
+            <div class="dash-bar-track"><div class="dash-bar-fill fill-green" style="width:83%"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="dash-card" style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div class="dash-card-label">Active Inquiries</div>
+          <div class="dash-card-val" style="font-size:1.25rem;">12 open</div>
+        </div>
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:16px;color:white;">→</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div id="faq" style="background: white;">
+  <div class="section">
+    <div style="max-width: 680px; margin: 0 auto;">
+      <div class="reveal" style="text-align:center; margin-bottom: 0;">
+        <div class="section-label" style="justify-content:center;">FAQ</div>
+        <h2 class="section-title" style="text-align:center;">Frequently Asked<br><em>Questions</em></h2>
+        <p class="section-body" style="text-align:center;margin:0 auto;">Everything you need to know about Planovar — for customers and vendors alike.</p>
+      </div>
+
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <div class="faq-q">
+            <h4>How do I find vendors on Planovar?</h4>
+            <span class="faq-ico">+</span>
+          </div>
+          <div class="faq-a">Download the Planovar app, create a free account, and use the search to filter vendors by category, location, price range, or event type. You can browse portfolios and read verified reviews before reaching out.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">
+            <h4>Are the vendors on Planovar verified?</h4>
+            <span class="faq-ico">+</span>
+          </div>
+          <div class="faq-a">Yes. Every vendor goes through email, phone, and business profile verification before their listing goes live. All reviews on the platform are tied to confirmed bookings — no fake ratings allowed.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">
+            <h4>How do I list my business on Planovar?</h4>
+            <span class="faq-ico">+</span>
+          </div>
+          <div class="faq-a">Download the app, sign up as a vendor, complete your business profile, choose your service category and coverage area, and go live. The basic listing is free — premium visibility packages are available for faster growth.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">
+            <h4>Is Planovar available outside Lagos?</h4>
+            <span class="faq-ico">+</span>
+          </div>
+          <div class="faq-a">Planovar currently serves vendors and customers across Nigeria including Lagos, Abuja, Port Harcourt, Ibadan, Kano, and Enugu. We're expanding to more cities continuously — vendors everywhere can sign up now.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">
+            <h4>How does the booking process work?</h4>
+            <span class="faq-ico">+</span>
+          </div>
+          <div class="faq-a">Once you find a vendor you like, you can send a booking request directly from their profile. The vendor reviews and responds, you can chat to confirm details, and the booking is logged in your dashboard for both parties.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">
+            <h4>Is the app free to download?</h4>
+            <span class="faq-ico">+</span>
+          </div>
+          <div class="faq-a">Yes — the Planovar app is completely free for customers. Download it on the App Store or Google Play, create an account, and start browsing vendors immediately with no subscription required.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APP DOWNLOAD -->
+<div id="app" style="background: var(--bg);">
+  <div class="app-section">
+    <div class="reveal">
+      <div class="section-label">Get the app</div>
+      <h2 class="section-title" style="font-size: clamp(2.2rem,5vw,4rem);">
+        Plan Better.<br><em>Celebrate Bigger.</em>
+      </h2>
+      <p class="section-body">Discover vendors, book services, and manage your entire event from your phone. Available on iOS and Android.</p>
+      <div class="app-btns">
+        <a href="#" class="app-btn">
+          <div class="app-btn-icon">🍎</div>
+          <div>
+            <span class="app-btn-text-small">Download on the</span>
+            <span class="app-btn-text-big">App Store</span>
+          </div>
+        </a>
+        <a href="#" class="app-btn">
+          <div class="app-btn-icon">▶</div>
+          <div>
+            <span class="app-btn-text-small">Get it on</span>
+            <span class="app-btn-text-big">Google Play</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="app-screens reveal">
+      <div class="mock-screen ms-side">
+        <div class="ms-inner">
+          <div class="ms-bar"></div>
+          <div class="ms-card-mock"><div class="ms-card-line"></div><div class="ms-card-line short"></div></div>
+          <div class="ms-card-mock"><div class="ms-card-line"></div><div class="ms-card-line shorter"></div></div>
+          <div class="ms-card-mock"><div class="ms-card-line"></div><div class="ms-card-line short"></div></div>
+        </div>
+      </div>
+      <div class="mock-screen ms-main">
+        <div class="ms-inner">
+          <div class="ms-bar"></div>
+          <div class="ms-avatar-row">
+            <div class="ms-av"></div>
+            <div class="ms-av-info">
+              <div class="ms-av-name"></div>
+              <div class="ms-av-sub"></div>
+            </div>
+          </div>
+          <div class="ms-card-mock"><div class="ms-card-line"></div><div class="ms-card-line shorter"></div></div>
+          <div class="ms-card-mock"><div class="ms-card-line"></div><div class="ms-card-line short"></div></div>
+          <div class="ms-card-mock"><div class="ms-card-line"></div><div class="ms-card-line shorter"></div></div>
+          <div class="ms-card-mock"><div class="ms-card-line"></div><div class="ms-card-line short"></div></div>
+        </div>
+      </div>
+      <div class="mock-screen ms-side">
+        <div class="ms-inner">
+          <div class="ms-bar"></div>
+          <div class="ms-card-mock"><div class="ms-card-line"></div><div class="ms-card-line short"></div></div>
+          <div class="ms-card-mock"><div class="ms-card-line"></div><div class="ms-card-line shorter"></div></div>
+          <div class="ms-card-mock"><div class="ms-card-line"></div><div class="ms-card-line short"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="logo">
+        <div class="logo-mark">P</div>
+        <span class="logo-text">Plan<em>ovar</em></span>
+      </a>
+      <p>Nigeria's digital event commerce marketplace — connecting organisers with verified vendors, seamlessly.</p>
+      <div style="display:flex;gap:10px;">
+        <a href="#" style="width:32px;height:32px;background:var(--bg);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;text-decoration:none;color:var(--muted);transition:all 0.2s;">𝕏</a>
+        <a href="#" style="width:32px;height:32px;background:var(--bg);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;text-decoration:none;color:var(--muted);">in</a>
+        <a href="#" style="width:32px;height:32px;background:var(--bg);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;text-decoration:none;color:var(--muted);">f</a>
+        <a href="#" style="width:32px;height:32px;background:var(--bg);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;text-decoration:none;color:var(--muted);">▶</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h6>Platform</h6>
+      <ul>
+        <li><a href="#">How it works</a></li>
+        <li><a href="#">Browse vendors</a></li>
+        <li><a href="#">Categories</a></li>
+        <li><a href="#">Mobile app</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h6>For Vendors</h6>
+      <ul>
+        <li><a href="#">Join as vendor</a></li>
+        <li><a href="#">Vendor dashboard</a></li>
+        <li><a href="#">Visibility plans</a></li>
+        <li><a href="#">Vendor support</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h6>Company</h6>
+      <ul>
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Privacy policy</a></li>
+        <li><a href="#">Terms of service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Planovar. All rights reserved.</span>
+    <div class="footer-legal">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Cookies</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const revEls = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } });
+}, { threshold: 0.1 });
+revEls.forEach(r => ro.observe(r));
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// Nav shrink
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  nav.style.padding = window.scrollY > 50 ? '0.7rem 2.5rem' : '1.1rem 2.5rem';
+});
+
+// Stagger hero pills
+document.querySelectorAll('.pill').forEach((p, i) => {
+  p.style.animationDelay = (i * 0.3) + 's';
+  p.style.opacity = '0';
+  setTimeout(() => { p.style.transition = 'opacity 0.6s'; p.style.opacity = '1'; }, 600 + i * 120);
+});
+</script>
+</body>
+</html>
