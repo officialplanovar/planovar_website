@@ -104,9 +104,13 @@ nav {
 
 /* Subtle map/world texture bg */
 .hero-bg {
-  position: absolute; inset: 0; z-index: 0;
-  background:
-    radial-gradient(ellipse 70% 50% at 50% 60%, rgba(123,92,240,0.06) 0%, transparent 70%);
+  position: absolute; 
+  inset: 0; 
+  z-index: 0; 
+  background-image: linear-gradient(ellipse 70% 50% at 50% 60%, rgba(123,92,240,0.06) 0%, transparent 70%), url('Planovar background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 /* Remove the absolute positions and animations */
 .pill-orbit {
