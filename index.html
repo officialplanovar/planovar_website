@@ -108,36 +108,41 @@ nav {
   background:
     radial-gradient(ellipse 70% 50% at 50% 60%, rgba(123,92,240,0.06) 0%, transparent 70%);
 }
-
-/* Floating category pills - animated */
+/* Remove the absolute positions and animations */
 .pill-orbit {
-  position: absolute; inset: 0; z-index: 0;
-  pointer-events: none;
+  position: relative;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  z-index: 1;
+  width: 100%;
 }
 
 .pill {
-  position: absolute;
-  display: flex; align-items: center; gap: 7px;
-  padding: 8px 14px;
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-pill);
-  font-size: 12px; font-weight: 500; color: var(--ink-2);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  white-space: nowrap;
+  position: relative;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  animation: none !important;
 }
-.pill-icon { font-size: 14px; }
 
-.pill-1  { top: 18%; left: 6%;  animation: floatA 7s ease-in-out infinite; }
-.pill-2  { top: 28%; right: 5%; animation: floatB 9s ease-in-out infinite 1s; }
-.pill-3  { top: 50%; left: 3%;  animation: floatA 8s ease-in-out infinite 2s; }
-.pill-4  { top: 62%; right: 4%; animation: floatB 7s ease-in-out infinite 0.5s; }
-.pill-5  { top: 78%; left: 8%;  animation: floatA 9s ease-in-out infinite 3s; }
-.pill-6  { top: 75%; right: 7%; animation: floatB 8s ease-in-out infinite 1.5s; }
-
-@keyframes floatA { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
-@keyframes floatB { 0%,100%{transform:translateY(0)} 50%{transform:translateY(10px)} }
-
+/* On mobile, turn it into a clean swipeable row instead of cutting them off */
+@media (max-width: 768px) {
+  .pill-orbit {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 4px 20px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Hide scrollbars but keep functionality */
+  .pill-orbit::-webkit-scrollbar {
+    display: none; 
+  }
+}
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: 7px;
   font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
