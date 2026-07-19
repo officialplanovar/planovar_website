@@ -562,173 +562,36 @@ nav.scrolled {
 .pb-sub { font-size: 8px; color: var(--accent); margin-top: 2px; font-weight: 600; }
 
 /* ── PREMIUM BENTO CATEGORIES ── */
-/* ── PREMIUM ZONAL CONTRAST BACKDROP ── */
+/* ── PREMIUM DARK-MODE BENTO CATEGORIES ── */
 .cats-bg { 
   position: relative;
-  background: radial-gradient(circle at 50% 50%, #f9f8fa 0%, #f7f5f2 100%); 
+  background: #0a0909; 
   padding: 7rem 0;
-  overflow: hidden; /* Safely clips the blurred background spheres */
-}
-
-/* Edge-Fading Top and Bottom Micro-Dividers */
-.cats-bg::before,
-.cats-bg::after {
-  content: '';
-  position: absolute;
-  left: 5%;
-  width: 90%;
-  height: 1px;
-  z-index: 1;
-}
-.cats-bg::before {
-  top: 0;
-  background: linear-gradient(90deg, transparent, rgba(123, 92, 240, 0.15), transparent);
-}
-.cats-bg::after {
-  bottom: 0;
-  background: linear-gradient(90deg, transparent, rgba(208, 204, 200, 0.4), transparent);
-}
-
-/* Base Structural Container for Absolute Elements */
-.cats-bg .section {
-  position: relative;
-  z-index: 2; /* Forces the text, headers, and grids safely above the auras */
-}
-
-/* Soft Floating Aura Spheres Layer */
-.cats-aura-wrap {
-  position: absolute;
-  inset: 0;
-  z-index: 0; /* Keeps layout behind content */
-  pointer-events: none; /* Prevents interference with clicks or swiping */
-}
-
-.cats-aura-1 {
-  position: absolute;
-  top: -10%;
-  left: -10%;
-  width: 50vw;
-  height: 50vw;
-  background: #7b5cf0;
-  opacity: 0.04; /* Strictly tuned between 3% and 5% */
-  filter: blur(140px);
-  border-radius: 50%;
-}
-
-.cats-aura-2 {
-  position: absolute;
-  bottom: -15%;
-  right: -10%;
-  width: 45vw;
-  height: 45vw;
-  background: #fdfcfa;
-  opacity: 0.05; /* Strictly tuned between 3% and 5% */
-  filter: blur(120px);
-  border-radius: 50%;
-} 
-}
-.cats-header {
-  display: flex; 
-  justify-content: space-between; 
-  align-items: flex-end; 
-  margin-bottom: 3.5rem; 
-}
-.cats-link {
-  font-size: 13px; 
-  font-weight: 600;
-  color: var(--accent); 
-  text-decoration: none; 
-  border-bottom: 1.5px solid rgba(123, 92, 240, 0.2); 
-  padding-bottom: 2px; 
-  transition: all 0.2s ease; 
-}
-.cats-link:hover { 
-  color: var(--ink); 
-  border-color: var(--ink); 
-}
-
-/* Premium Asymmetrical Bento Grid Matrix */
-.cats-grid {
-  display: grid; 
-  grid-template-columns: repeat(4, 1fr); 
-  grid-auto-rows: 160px;
-  gap: 1.25rem; 
-  width: 100%;
-}
-
-/* Micro-experience Base Tile Structure */
-.cat-tile {
-  background: #faf9f6; 
-  border: 1px solid rgba(232, 228, 224, 0.7);
-  border-radius: 20px;
-  padding: 1.75rem; 
-  display: flex; 
-  flex-direction: column; 
-  justify-content: space-between;
-  cursor: pointer; 
-  position: relative; 
-  overflow: hidden; 
-  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-/* Asymmetrical Weight Variations (Bento Rules) */
-.cat-large-x { grid-column: span 2; grid-row: span 2; }
-.cat-large-y { grid-row: span 2; }
-
-.cat-ico-wrap {
-  width: 100%; 
-  height: 120px; /* Expands the image area dramatically */
-  border-radius: 12px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
   overflow: hidden;
-  margin-bottom: 1rem;
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
 }
 
-/* Force the featured large items to have an even bigger image footprint */
-.cat-large-x .cat-ico-wrap {
-  height: 180px;
-}
-.cat-large-y .cat-ico-wrap {
-  height: 240px;
-}
-.cat-tile-meta {
-  margin-top: auto;
-}
-.cat-tile-name {
-  font-family: 'Fraunces', serif; 
-  font-size: 1.1rem; 
-  font-weight: 600; 
-  color: var(--ink); 
-  letter-spacing: -0.01em; 
-  margin-bottom: 4px;
-}
-.cat-tile-count {
-  font-size: 12px; 
-  color: var(--muted); 
-  font-weight: 500;
-}
-.cat-tile-arrow {
-  position: absolute; 
-  right: 1.5rem; top: 1.5rem; 
-  font-size: 16px; 
-  color: var(--accent); 
-  opacity: 0; 
-  transform: translate(-6px, 6px); 
-  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-}
+/* Update section labels for dark contrast */
+.cats-bg .section-label { color: var(--accent-mid); }
+.cats-bg .section-title { color: #ffffff; }
 
-/* Immersive Layered Hover States */
+/* Inverted Dark-Mode Tiles */
+.cat-tile {
+  background: rgba(255, 255, 255, 0.03); 
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+.cat-tile-name { color: #ffffff; }
+.cat-tile-count { color: rgba(255, 255, 255, 0.4); }
+
+/* Updated Hover State for Dark Mode */
 .cat-tile:hover {
-  background: #ffffff;
-  transform: translateY(-5px);
-  border-color: rgba(123, 92, 240, 0.3);
-  box-shadow: 
-    0 15px 35px rgba(123, 92, 240, 0.05),
-    inset 0 0 20px rgba(123, 92, 240, 0.02);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(123, 92, 240, 0.4);
 }
+
+/* Adjusted Aura Spheres for dark background */
+.cats-aura-1 { background: #7b5cf0; opacity: 0.15; filter: blur(140px); }
+.cats-aura-2 { background: #ffffff; opacity: 0.03; filter: blur(120px); }
 .cat-tile:hover .cat-ico-wrap {
   transform: translateY(-4px) scale(1.05);
 }
