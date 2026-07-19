@@ -562,74 +562,40 @@ nav.scrolled {
 .pb-sub { font-size: 8px; color: var(--accent); margin-top: 2px; font-weight: 600; }
 
 /* ── PREMIUM BENTO CATEGORIES ── */
-/* ── PREMIUM DARK-MODE BENTO CATEGORIES ── */
-.cats-bg { 
-  position: relative;
-  background: #0a0909; 
-  padding: 7rem 0;
-  overflow: hidden;
-}
 
-/* Update section labels for dark contrast */
+/* ── PREMIUM DARK-MODE BENTO CATEGORIES ── */
+.cats-bg { position: relative; background: #0a0909; padding: 7rem 0; overflow: hidden; }
 .cats-bg .section-label { color: var(--accent-mid); }
 .cats-bg .section-title { color: #ffffff; }
 
-/* Inverted Dark-Mode Tiles */
-.cat-tile {
-  background: rgba(255, 255, 255, 0.03); 
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-}
-.cat-tile-name { color: #ffffff; }
-.cat-tile-count { color: rgba(255, 255, 255, 0.4); }
+/* Grid Layout */
+.cats-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 160px; gap: 1.25rem; width: 100%; }
+.cat-large-x { grid-column: span 2; grid-row: span 2; }
+.cat-large-y { grid-row: span 2; }
 
-/* Updated Hover State for Dark Mode */
-.cat-tile:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(123, 92, 240, 0.4);
-}
+/* Tile Styling */
+.cat-tile { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; position: relative; overflow: hidden; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); color: #ffffff; }
+.cat-tile-name { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600; color: #ffffff; margin-bottom: 4px; }
+.cat-tile-count { font-size: 12px; color: rgba(255, 255, 255, 0.4); font-weight: 500; }
+.cat-ico-wrap { width: 100%; height: 120px; border-radius: 12px; overflow: hidden; margin-bottom: 1rem; }
+.cat-large-x .cat-ico-wrap { height: 180px; }
+.cat-large-y .cat-ico-wrap { height: 240px; }
 
-/* Adjusted Aura Spheres for dark background */
-.cats-aura-1 { background: #7b5cf0; opacity: 0.15; filter: blur(140px); }
-.cats-aura-2 { background: #ffffff; opacity: 0.03; filter: blur(120px); }
-.cat-tile:hover .cat-ico-wrap {
-  transform: translateY(-4px) scale(1.05);
-}
-.cat-tile:hover .cat-tile-arrow {
-  opacity: 1;
-  transform: translate(0, 0);
-}
+/* Hover States */
+.cat-tile:hover { background: rgba(255, 255, 255, 0.06); transform: translateY(-5px); border-color: rgba(123, 92, 240, 0.5); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); }
+.cat-tile:hover .cat-ico-wrap { transform: translateY(-4px) scale(1.05); }
 
-/* 3. Horizontal "Swipeable" Responsive Track for Mobile */
+/* Mobile Swipe */
 @media (max-width: 992px) {
-  .cats-grid {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    padding: 0.5rem 1.5rem 1.5rem;
-    margin-left: -1.5rem;
-    margin-right: -1.5rem;
-    width: calc(100% + 3rem);
-    gap: 1rem;
-    grid-auto-rows: unset;
-  }
-  .cats-grid::-webkit-scrollbar {
-    display: none;
-  }
-  .cat-tile {
-    flex: 0 0 260px;
-    height: 220px;
-    scroll-snap-align: start;
-    padding: 1.5rem;
-  }
-  .cat-large-x, .cat-large-y {
-    grid-column: unset;
-    grid-row: unset;
-  }
+  .cats-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 0.5rem 1.5rem 1.5rem; gap: 1rem; grid-auto-rows: unset; }
+  .cats-grid::-webkit-scrollbar { display: none; }
+  .cat-tile { flex: 0 0 260px; height: 220px; scroll-snap-align: start; }
+  .cat-large-x, .cat-large-y { grid-column: unset; grid-row: unset; }
 }
 
+/* Aura Spheres */
+.cats-aura-1 { position: absolute; top: -10%; left: -10%; width: 50vw; height: 50vw; background: #7b5cf0; opacity: 0.15; filter: blur(140px); border-radius: 50%; pointer-events: none; }
+.cats-aura-2 { position: absolute; bottom: -15%; right: -10%; width: 45vw; height: 45vw; background: #ffffff; opacity: 0.03; filter: blur(120px); border-radius: 50%; pointer-events: none; }
 /* ── FEATURE CARDS ── */
 .feat-grid {
   display: grid;
@@ -1138,110 +1104,57 @@ footer {
     <div class="cats-aura-2"></div>
   </div>
 
+<div id="categories" class="cats-bg">
+  <div class="cats-aura-1"></div>
+  <div class="cats-aura-2"></div>
   <div class="section">
     <div class="cats-header reveal">
-      <div>
-        <div class="section-label">Service Categories</div>
-        <h2 class="section-title">Every vendor<br>under one roof.</h2>
+      <div class="section-label">Service Categories</div>
+    </div>
+    <div class="cats-grid">
+      <div class="cat-tile cat-large-x">
+        <div class="cat-ico-wrap"><img src="Photography & Video.png?v=2" style="width: 100%; height: 100%; object-fit: cover;"></div>
+        <div class="cat-tile-name">Photography & Video</div>
+        <div class="cat-tile-count">1,240+ Vetted Professionals</div>
       </div>
-      <a href="#app" class="cats-link">Browse all in app →</a>
-    </div>
-
-  <div class="cats-grid">
-  <!-- Photography & Video -->
-  <div class="cat-tile cat-large-x">
-    <div class="cat-ico-wrap">
-      <img src="Photography & Video.png?v=2" alt="Photography & Video" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-    <div class="cat-tile-arrow">→</div>
-    <div class="cat-tile-meta">
-      <div class="cat-tile-name">Photography & Video</div>
-      <div class="cat-tile-count">1,240+ Vetted Professionals</div>
-    </div>
-  </div>
-
-  <!-- Catering & Food -->
-  <div class="cat-tile">
-    <div class="cat-ico-wrap">
-      <img src="Catering & Food.png?v=2" alt="Catering & Food" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-    <div class="cat-tile-arrow">→</div>
-    <div class="cat-tile-meta">
-      <div class="cat-tile-name">Catering & Food</div>
-      <div class="cat-tile-count">850 vendors</div>
-    </div>
-  </div>
-
-  <!-- Makeup & Beauty -->
-  <div class="cat-tile">
-    <div class="cat-ico-wrap">
-      <img src="Makeup & Beauty.png?v=2" alt="Makeup & Beauty" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-    <div class="cat-tile-arrow">→</div>
-    <div class="cat-tile-meta">
-      <div class="cat-tile-name">Makeup & Beauty</div>
-      <div class="cat-tile-count">610 vendors</div>
+      <div class="cat-tile cat-large-y">
+        <div class="cat-ico-wrap"><img src="Event Planners.png?v=2" style="width: 100%; height: 100%; object-fit: cover;"></div>
+        <div class="cat-tile-name">Event Planners</div>
+        <div class="cat-tile-count">980+ Top Organizers</div>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-ico-wrap"><img src="Catering & Food.png?v=2" style="width: 100%; height: 100%; object-fit: cover;"></div>
+        <div class="cat-tile-name">Catering & Food</div>
+        <div class="cat-tile-count">850 vendors</div>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-ico-wrap"><img src="Makeup & Beauty.png?v=2" style="width: 100%; height: 100%; object-fit: cover;"></div>
+        <div class="cat-tile-name">Makeup & Beauty</div>
+        <div class="cat-tile-count">610 vendors</div>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-ico-wrap"><img src="Decor & Design.png?v=2" style="width: 100%; height: 100%; object-fit: cover;"></div>
+        <div class="cat-tile-name">Decor & Design</div>
+        <div class="cat-tile-count">740 vendors</div>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-ico-wrap"><img src="Venues & Halls.png?v=2" style="width: 100%; height: 100%; object-fit: cover;"></div>
+        <div class="cat-tile-name">Venues & Halls</div>
+        <div class="cat-tile-count">310 locations</div>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-ico-wrap"><img src="Cakes & Desserts.png?v=2" style="width: 100%; height: 100%; object-fit: cover;"></div>
+        <div class="cat-tile-name">Cakes & Desserts</div>
+        <div class="cat-tile-count">430 vendors</div>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-ico-wrap"><img src="DJs & Sound Systems.png?v=2" style="width: 100%; height: 100%; object-fit: cover;"></div>
+        <div class="cat-tile-name">DJs & Sound Systems</div>
+        <div class="cat-tile-count">520 vendors</div>
+      </div>
     </div>
   </div>
-
-  <!-- Event Planners -->
-  <div class="cat-tile cat-large-y">
-    <div class="cat-ico-wrap">
-      <img src="Event Planners.png?v=2" alt="Event Planners" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-    <div class="cat-tile-arrow">→</div>
-    <div class="cat-tile-meta">
-      <div class="cat-tile-name">Event Planners</div>
-      <div class="cat-tile-count">980+ Top Organizers</div>
-    </div>
-  </div>
-
-  <!-- Decor & Design -->
-  <div class="cat-tile">
-    <div class="cat-ico-wrap">
-      <img src="Decor & Design.png?v=2" alt="Decor & Design" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-    <div class="cat-tile-arrow">→</div>
-    <div class="cat-tile-meta">
-      <div class="cat-tile-name">Decor & Design</div>
-      <div class="cat-tile-count">740 vendors</div>
-    </div>
-  </div>
-
-  <!-- Venues & Halls -->
-  <div class="cat-tile">
-    <div class="cat-ico-wrap">
-      <img src="Venue & Halls.png?v=2" alt="Venues & Halls" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-    <div class="cat-tile-arrow">→</div>
-    <div class="cat-tile-meta">
-      <div class="cat-tile-name">Venues & Halls</div>
-      <div class="cat-tile-count">310 locations</div>
-    </div>
-  </div>
-
-  <!-- Cakes & Desserts -->
-  <div class="cat-tile">
-    <div class="cat-ico-wrap">
-      <img src="Cakes & Desserts.png?v=2" alt="Cakes & Desserts" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-    <div class="cat-tile-arrow">→</div>
-    <div class="cat-tile-meta">
-      <div class="cat-tile-name">Cakes & Desserts</div>
-      <div class="cat-tile-count">430 vendors</div>
-    </div>
-  </div>
-
-  <!-- DJs & Sound Systems -->
-  <div class="cat-tile">
-    <div class="cat-ico-wrap">
-      <img src="DJs & Sound Systems.png?v=2" alt="DJs & Sound Systems" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-    <div class="cat-tile-arrow">→</div>
-    <div class="cat-tile-meta">
-      <div class="cat-tile-name">DJs & Sound Systems</div>
-      <div class="cat-tile-count">520 vendors</div>
-    </div>
+</div>
   </div>
 </div>
   </div>
