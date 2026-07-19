@@ -90,60 +90,118 @@ nav {
   cursor: pointer; flex-direction: column; gap: 5px;
 }
 .menu-btn span { display: block; width: 16px; height: 1.5px; background: var(--ink); }
-
-/* ── HERO ── */
+/* ── UPGRADED PREMIUM HERO ── */
 .hero {
-  min-height: 85vh;
-  display: flex; flex-direction: column;
-  justify-content: center; align-items: center;
-  text-align: center;
-  padding: 9rem 2rem 5rem;
-  position: relative;
-  overflow: hidden;
+  min-height: 85vh; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  text-align: center; 
+  padding: 10rem 2rem 6rem; 
+  position: relative; 
+  overflow: hidden; 
+  background-color: #fcfbfa;
 }
 
-/* Subtle map/world texture bg */
 .hero-bg {
   position: absolute; 
   inset: 0; 
-  z-index: 1; 
-  background: linear-gradient(ellipse 70% 50% at 50% 60%, rgba(123,92,240,0.06) 0%, transparent 70%), url("Planovar background.png?v=2") no-repeat center center / cover;
+  z-index: 0; 
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(123,92,240,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(91,163,255,0.04) 0%, transparent 40%),
+    linear-gradient(to bottom, rgba(252,251,250,0.3), rgba(252,251,250,0.95)), 
+    url("Planovar background.png?v=2") no-repeat center center / cover;
+  filter: contrast(1.02);
 }
-  .hero-eyebrow, .hero-title, .hero-sub, .hero-actions, .pill-orbit {
+
+.hero-title {
+  font-family: 'Fraunces', serif; 
+  font-size: clamp(3.5rem, 7.5vw, 6.2rem); 
+  font-weight: 500; 
+  line-height: 1.05; 
+  letter-spacing: -0.04em; 
+  color: #110f0f; 
+  margin-bottom: 1.5rem; 
+  position: relative; 
+  z-index: 2; 
+  max-width: 900px; 
+}
+
+.hero-eyebrow, .hero-sub, .hero-actions {
   position: relative;
   z-index: 2;
 }
-/* Remove the absolute positions and animations */
+
 .pill-orbit {
-  position: relative;
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2rem;
-  z-index: 1;
-  width: 100%;
+  position: relative; 
+  display: flex; 
+  gap: 14px; 
+  justify-content: center; 
+  align-items: center; 
+  margin: 3rem 0; 
+  z-index: 2; 
+  width: 100%; 
+  padding: 10px 0;
 }
 
 .pill {
-  position: relative;
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-  animation: none !important;
+  position: relative; 
+  top: auto !important; left: auto !important; right: auto !important; 
+  animation: none !important; 
+  display: inline-flex; 
+  align-items: center; 
+  gap: 8px; 
+  padding: 10px 18px; 
+  background: rgba(255, 255, 255, 0.75); 
+  backdrop-filter: blur(8px); 
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(232, 228, 224, 0.6); 
+  border-radius: 40px; 
+  font-size: 13px; 
+  font-weight: 500; 
+  color: #4a4a4a; 
+  box-shadow: 0 4px 14px rgba(20, 18, 18, 0.03); 
+  white-space: nowrap; 
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  cursor: pointer;
 }
+
+.pill:hover {
+  transform: translateY(-3px) scale(1.02);
+  background: #ffffff;
+  border-color: #7b5cf0;
+  box-shadow: 0 10px 25px rgba(123, 92, 240, 0.08);
+}
+
+
 
 /* On mobile, turn it into a clean swipeable row instead of cutting them off */
 @media (max-width: 768px) {
   .hero {
-    min-height: 55vh; /* Cuts the section down to half height on mobile */
-    padding: 7rem 1.25rem 3.5rem; /* Tightens padding to pull components closer */
+    min-height: 65vh; 
+    padding: 8rem 1.5rem 4rem; 
   }
+  
   .pill-orbit {
-    justify-content: flex-start;
-    overflow-x: auto;
-    padding: 4px 20px;
-    scroll-behavior: smooth;
+    justify-content: flex-start; 
+    overflow-x: auto; 
+    padding: 8px 1.5rem; 
+    margin: 2.5rem 0;
+    scroll-behavior: smooth; 
+    -webkit-overflow-scrolling: touch; 
+  }
+  
+  .pill-orbit::-webkit-scrollbar {
+    display: none; 
+  }
+  
+  .pill {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+}
     -webkit-overflow-scrolling: touch;
   }
   
