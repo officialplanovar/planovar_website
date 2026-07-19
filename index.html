@@ -614,15 +614,23 @@ nav.scrolled {
 .cat-large-y { grid-row: span 2; }
 
 .cat-ico-wrap {
-  width: 46px; height: 46px; 
-  background: #ffffff; 
-  border-radius: 14px; 
+  width: 100%; 
+  height: 120px; /* Expands the image area dramatically */
+  border-radius: 12px; 
   display: flex; 
   align-items: center; 
   justify-content: center; 
-  font-size: 22px; 
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  overflow: hidden;
+  margin-bottom: 1rem;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
+}
+
+/* Force the featured large items to have an even bigger image footprint */
+.cat-large-x .cat-ico-wrap {
+  height: 180px;
+}
+.cat-large-y .cat-ico-wrap {
+  height: 240px;
 }
 .cat-tile-meta {
   margin-top: auto;
@@ -1212,7 +1220,7 @@ footer {
   <!-- Photography & Video -->
   <div class="cat-tile cat-large-x">
     <div class="cat-ico-wrap">
-      <img src="Photography & Video.png" alt="Photography & Video" style="width: 100%; height: 100%; object-fit: contain;">
+      <img src="Photography & Video.png?v=2" alt="Photography & Video" style="width: 100%; height: 100%; object-fit: cover;">
     </div>
     <div class="cat-tile-arrow">→</div>
     <div class="cat-tile-meta">
@@ -1224,7 +1232,7 @@ footer {
   <!-- Catering & Food -->
   <div class="cat-tile">
     <div class="cat-ico-wrap">
-      <img src="Catering & Food.png" alt="Catering & Food" style="width: 100%; height: 100%; object-fit: contain;">
+      <img src="Catering & Food.png?v=2" alt="Catering & Food" style="width: 100%; height: 100%; object-fit: cover;">
     </div>
     <div class="cat-tile-arrow">→</div>
     <div class="cat-tile-meta">
@@ -1236,7 +1244,7 @@ footer {
   <!-- Makeup & Beauty -->
   <div class="cat-tile">
     <div class="cat-ico-wrap">
-      <img src="Makeup & Beauty.png" alt="Makeup & Beauty" style="width: 100%; height: 100%; object-fit: contain;">
+      <img src="Makeup & Beauty.png?v=2" alt="Makeup & Beauty" style="width: 100%; height: 100%; object-fit: cover;">
     </div>
     <div class="cat-tile-arrow">→</div>
     <div class="cat-tile-meta">
@@ -1248,7 +1256,7 @@ footer {
   <!-- Event Planners -->
   <div class="cat-tile cat-large-y">
     <div class="cat-ico-wrap">
-      <img src="Event Planners.png" alt="Event Planners" style="width: 100%; height: 100%; object-fit: contain;">
+      <img src="Event Planners.png?v=2" alt="Event Planners" style="width: 100%; height: 100%; object-fit: cover;">
     </div>
     <div class="cat-tile-arrow">→</div>
     <div class="cat-tile-meta">
@@ -1260,7 +1268,7 @@ footer {
   <!-- Decor & Design -->
   <div class="cat-tile">
     <div class="cat-ico-wrap">
-      <img src="Decor & Design.png" alt="Decor & Design" style="width: 100%; height: 100%; object-fit: contain;">
+      <img src="Decor & Design.png?v=2" alt="Decor & Design" style="width: 100%; height: 100%; object-fit: cover;">
     </div>
     <div class="cat-tile-arrow">→</div>
     <div class="cat-tile-meta">
@@ -1272,7 +1280,7 @@ footer {
   <!-- Venues & Halls -->
   <div class="cat-tile">
     <div class="cat-ico-wrap">
-      <img src="Venues & Halls.png" alt="Venues & Halls" style="width: 100%; height: 100%; object-fit: contain;">
+      <img src="Venues & Halls.png?v=2" alt="Venues & Halls" style="width: 100%; height: 100%; object-fit: cover;">
     </div>
     <div class="cat-tile-arrow">→</div>
     <div class="cat-tile-meta">
@@ -1284,7 +1292,7 @@ footer {
   <!-- Cakes & Desserts -->
   <div class="cat-tile">
     <div class="cat-ico-wrap">
-      <img src="Cakes & Desserts.png" alt="Cakes & Desserts" style="width: 100%; height: 100%; object-fit: contain;">
+      <img src="Cakes & Desserts.png?v=2" alt="Cakes & Desserts" style="width: 100%; height: 100%; object-fit: cover;">
     </div>
     <div class="cat-tile-arrow">→</div>
     <div class="cat-tile-meta">
@@ -1296,7 +1304,7 @@ footer {
   <!-- DJs & Sound Systems -->
   <div class="cat-tile">
     <div class="cat-ico-wrap">
-      <img src="DJs & Sound Systems.png" alt="DJs & Sound Systems" style="width: 100%; height: 100%; object-fit: contain;">
+      <img src="DJs & Sound Systems.png?v=2" alt="DJs & Sound Systems" style="width: 100%; height: 100%; object-fit: cover;">
     </div>
     <div class="cat-tile-arrow">→</div>
     <div class="cat-tile-meta">
