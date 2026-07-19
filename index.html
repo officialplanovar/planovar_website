@@ -38,15 +38,21 @@ nav {
   display: flex; 
   align-items: center; 
   justify-content: space-between; 
-  padding: 0.75rem 2.5rem; /* Shrunk padding to make it slim and elegant */
-  background: rgba(253, 252, 255, 0.75); /* Clean off-white canvas */
-  backdrop-filter: blur(16px); 
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(155, 127, 248, 0.15); /* Fading purple micro-border tint */
-  box-shadow: 
-    0 4px 30px rgba(0, 0, 0, 0.02),
-    inset 0 -1px 0 rgba(91, 163, 255, 0.1); /* Sublest blue gradient edge hint */
-  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  padding: 1rem 2.5rem; 
+  background: transparent; /* Starts completely clear */
+  border-bottom: 1px solid transparent; 
+  box-shadow: none;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Scrolled state triggered by JavaScript */
+nav.scrolled {
+  padding: 0.75rem 2.5rem; /* Slims down slightly on scroll */
+  background: rgba(253, 252, 255, 0.75); 
+  backdrop-filter: blur(20px); 
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(123, 92, 240, 0.25); /* Crisp violet brand border */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
 }
 
 /* Make nav links playful and interactive on hover */
@@ -1426,19 +1432,16 @@ document.querySelectorAll('.faq-q').forEach(q => {
     if (!isOpen) item.classList.add('open');
   });
 });
-
-// Nav shrink
+// Brand Sticky Navbar Transition
 window.addEventListener('scroll', () => {
   const nav = document.getElementById('nav');
-  nav.style.padding = window.scrollY > 50 ? '0.7rem 2.5rem' : '1.1rem 2.5rem';
+  if (window.scrollY > 10) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
 });
 
-// Stagger hero pills
-document.querySelectorAll('.pill').forEach((p, i) => {
-  p.style.animationDelay = (i * 0.3) + 's';
-  p.style.opacity = '0';
-  setTimeout(() => { p.style.transition = 'opacity 0.6s'; p.style.opacity = '1'; }, 600 + i * 120);
-});
 </script>
 </body>
 </html>
