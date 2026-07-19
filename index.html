@@ -93,7 +93,7 @@ nav {
 
 /* ── HERO ── */
 .hero {
-  min-height: 100vh;
+  min-height: 85vh;
   display: flex; flex-direction: column;
   justify-content: center; align-items: center;
   text-align: center;
@@ -135,6 +135,10 @@ nav {
 
 /* On mobile, turn it into a clean swipeable row instead of cutting them off */
 @media (max-width: 768px) {
+  .hero {
+    min-height: 55vh; /* Cuts the section down to half height on mobile */
+    padding: 7rem 1.25rem 3.5rem; /* Tightens padding to pull components closer */
+  }
   .pill-orbit {
     justify-content: flex-start;
     overflow-x: auto;
