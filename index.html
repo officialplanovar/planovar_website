@@ -329,34 +329,81 @@ nav.scrolled {
 }
 .btn-outline:hover { border-color: var(--ink); }
 
-/* ── TRUST BAR ── */
+/* ── MULTI-STAGE ANIMATED METRICS MARQUEE ── */
 .trust-bar {
-  background: white;
+  background: var(--white);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  padding: 2.5rem 3rem;
-  display: flex; justify-content: center;
+  padding: 2.2rem 0;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  display: flex;
+}
+
+/* Base structural row layout */
+.trust-track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 0;
+  width: 100%;
+  transition: gap 0.5s ease;
+}
+
+/* Activated horizontal loop state */
+.trust-bar.ticker-active .trust-track {
+  justify-content: flex-start;
+  width: max-content;
+  gap: 4rem;
+  padding-right: 4rem;
+  animation: metricsMarquee 28s linear infinite;
 }
 
 .trust-item {
-  flex: 1; max-width: 220px;
-  display: flex; flex-direction: column;
-  align-items: center; gap: 4px;
-  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 0 3.5rem;
+  flex-shrink: 0;
   border-right: 1px solid var(--border);
 }
-.trust-item:last-child { border-right: none; }
+
+.trust-bar.ticker-active .trust-item {
+  border-right: none; /* Strip dividers once loop starts */
+}
 
 .trust-num {
   font-family: 'Fraunces', serif;
-  font-size: 2.4rem; font-weight: 600;
-  letter-spacing: -0.04em; color: var(--ink);
+  font-size: 2.6rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--ink);
   line-height: 1;
 }
+
 .trust-label {
-  font-size: 12px; color: var(--muted);
-  letter-spacing: 0.04em; text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Endless fluid marquee keyframes */
+@keyframes metricsMarquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+/* Mobile Ticker Responsive Scaling Adjustment */
+@media (max-width: 768px) {
+  .trust-bar { padding: 1.8rem 0; }
+  .trust-num { font-size: 2.1rem; }
+  .trust-item { padding: 0 2rem; }
+  .trust-bar.ticker-active .trust-track { gap: 2rem; padding-right: 2rem; }
 }
 
 /* ── SECTION WRAPPER ── */
@@ -939,22 +986,29 @@ footer {
 </section>
 
 <!-- TRUST -->
-<div class="trust-bar">
-  <div class="trust-item">
-    <span class="trust-num">2,400+</span>
-    <span class="trust-label">Verified Vendors</span>
-  </div>
-  <div class="trust-item">
-    <span class="trust-num">18K+</span>
-    <span class="trust-label">Events Powered</span>
-  </div>
-  <div class="trust-item">
-    <span class="trust-num">12</span>
-    <span class="trust-label">Service Categories</span>
-  </div>
-  <div class="trust-item">
-    <span class="trust-num">4.9★</span>
-    <span class="trust-label">Average Rating</span>
+<!-- ANIMATED METRICS -->
+<div class="trust-bar" id="metricsBar">
+  <div class="trust-track" id="metricsTrack">
+    <div class="trust-item">
+      <div class="trust-num" data-target="2400" data-suffix="+">0</div>
+      <div class="trust-label">Verified Vendors</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-num" data-target="18" data-suffix="K+">0</div>
+      <div class="trust-label">Events Powered</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-num" data-target="12" data-suffix="">0</div>
+      <div class="trust-label">Service Categories</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-num" data-target="4.9" data-suffix="★" data-decimals="1">0</div>
+      <div class="trust-label">Average Rating</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-num" data-target="195" data-suffix="">0</div>
+      <div class="trust-label">Countries Covered</div>
+    </div>
   </div>
 </div>
 
@@ -1441,7 +1495,67 @@ window.addEventListener('scroll', () => {
     nav.classList.remove('scrolled');
   }
 });
+// Fluid Metrics Engine: Counter Stage 1 -> Endless Marquee Stage 2
+document.addEventListener("DOMContentLoaded", () => {
+  const metricsContainer = document.getElementById("metricsBar");
+  const track = document.getElementById("metricsTrack");
+  const elements = document.querySelectorAll(".trust-num");
+  const duration = 2200; // Counter timing window in milliseconds
 
+  const startCounters = () => {
+    let startTime = null;
+
+    const animateCounters = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      
+      // Luxurious easeOutCubic curve modeling
+      const easeProgress = 1 - Math.pow(1 - progress, 3);
+
+      elements.forEach(el => {
+        const target = parseFloat(el.getAttribute("data-target"));
+        const suffix = el.getAttribute("data-suffix") || "";
+        const decimals = parseInt(el.getAttribute("data-decimals")) || 0;
+        
+        let currentVal = easeProgress * target;
+        
+        if (decimals > 0) {
+          el.innerText = currentVal.toFixed(decimals) + suffix;
+        } else {
+          // Add thousand commas format separator injection
+          el.innerText = Math.floor(currentVal).toLocaleString() + suffix;
+        }
+      });
+
+      if (progress < 1) {
+        requestAnimationFrame(animateCounters);
+      } else {
+        activateInfiniteTicker();
+      }
+    };
+
+    requestAnimationFrame(animateCounters);
+  };
+
+  const activateInfiniteTicker = () => {
+    // Clone all nodes seamlessly for the gapless looping sequence
+    const items = track.innerHTML;
+    track.innerHTML = items + items;
+    
+    // Switch the grid layouts over to running marquee animation frames
+    metricsContainer.classList.add("ticker-active");
+  };
+
+  // Run automatically when metric parameters cross viewport layout context boundaries
+  const observer = new IntersectionObserver((entries) => {
+    if(entries[0].isIntersecting) {
+      startCounters();
+      observer.unobserve(metricsContainer);
+    }
+  }, { threshold: 0.15 });
+
+  observer.observe(metricsContainer);
+});
 </script>
 </body>
 </html>
