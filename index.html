@@ -562,8 +562,70 @@ nav.scrolled {
 .pb-sub { font-size: 8px; color: var(--accent); margin-top: 2px; font-weight: 600; }
 
 /* ── PREMIUM BENTO CATEGORIES ── */
+/* ── PREMIUM ZONAL CONTRAST BACKDROP ── */
 .cats-bg { 
-  background: #ffffff; 
+  position: relative;
+  background: radial-gradient(circle at 50% 50%, #f9f8fa 0%, #f7f5f2 100%); 
+  padding: 7rem 0;
+  overflow: hidden; /* Safely clips the blurred background spheres */
+}
+
+/* Edge-Fading Top and Bottom Micro-Dividers */
+.cats-bg::before,
+.cats-bg::after {
+  content: '';
+  position: absolute;
+  left: 5%;
+  width: 90%;
+  height: 1px;
+  z-index: 1;
+}
+.cats-bg::before {
+  top: 0;
+  background: linear-gradient(90deg, transparent, rgba(123, 92, 240, 0.15), transparent);
+}
+.cats-bg::after {
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(208, 204, 200, 0.4), transparent);
+}
+
+/* Base Structural Container for Absolute Elements */
+.cats-bg .section {
+  position: relative;
+  z-index: 2; /* Forces the text, headers, and grids safely above the auras */
+}
+
+/* Soft Floating Aura Spheres Layer */
+.cats-aura-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0; /* Keeps layout behind content */
+  pointer-events: none; /* Prevents interference with clicks or swiping */
+}
+
+.cats-aura-1 {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: #7b5cf0;
+  opacity: 0.04; /* Strictly tuned between 3% and 5% */
+  filter: blur(140px);
+  border-radius: 50%;
+}
+
+.cats-aura-2 {
+  position: absolute;
+  bottom: -15%;
+  right: -10%;
+  width: 45vw;
+  height: 45vw;
+  background: #fdfcfa;
+  opacity: 0.05; /* Strictly tuned between 3% and 5% */
+  filter: blur(120px);
+  border-radius: 50%;
+} 
 }
 .cats-header {
   display: flex; 
@@ -1207,10 +1269,16 @@ footer {
 
 <!-- CATEGORIES -->
 <div id="categories" class="cats-bg">
+  <!-- Soft Floating Aura Spheres Completely Behind Layout Layer -->
+  <div class="cats-aura-wrap">
+    <div class="cats-aura-1"></div>
+    <div class="cats-aura-2"></div>
+  </div>
+
   <div class="section">
     <div class="cats-header reveal">
       <div>
-        <div class="section-label">Service categories</div>
+        <div class="section-label">Service Categories</div>
         <h2 class="section-title">Every vendor<br>under one roof.</h2>
       </div>
       <a href="#app" class="cats-link">Browse all in app →</a>
