@@ -30,15 +30,57 @@
 html { scroll-behavior: smooth; }
 body { font-family: 'Instrument Sans', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; }
 
-/* ── NAV ── */
+/* ── MODERN PLAYFUL NAVBAR ── */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 1.1rem 2.5rem;
-  background: rgba(247,245,242,0.88);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-  transition: padding 0.3s;
+  position: fixed; 
+  top: 0; left: 0; right: 0; 
+  z-index: 100; 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  padding: 0.75rem 2.5rem; /* Shrunk padding to make it slim and elegant */
+  background: rgba(253, 252, 255, 0.75); /* Clean off-white canvas */
+  backdrop-filter: blur(16px); 
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(155, 127, 248, 0.15); /* Fading purple micro-border tint */
+  box-shadow: 
+    0 4px 30px rgba(0, 0, 0, 0.02),
+    inset 0 -1px 0 rgba(91, 163, 255, 0.1); /* Sublest blue gradient edge hint */
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Make nav links playful and interactive on hover */
+.nav-links a {
+  font-size: 14px; 
+  color: #5c5552; 
+  text-decoration: none; 
+  font-weight: 500;
+  position: relative;
+  padding: 6px 0;
+  transition: color 0.2s ease; 
+}
+
+.nav-links a:hover { 
+  color: var(--accent); /* Switches cleanly to your signature brand purple */
+}
+
+/* Playful expanding accent underline bar under links */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, #9b7ff8, #5ba3ff);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.nav-links a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
 }
 
 .logo {
@@ -82,12 +124,17 @@ nav {
 .nav-btn:hover { opacity: 0.82; }
 
 .menu-btn {
-  display: none;
-  width: 40px; height: 40px;
-  border-radius: 50%; background: white;
-  border: 1px solid var(--border);
-  align-items: center; justify-content: center;
-  cursor: pointer; flex-direction: column; gap: 5px;
+  display: none; 
+  width: 36px; height: 36px; 
+  border-radius: 50%; 
+  background: white; 
+  border: 1px solid rgba(155, 127, 248, 0.2); 
+  align-items: center; 
+  justify-content: center; 
+  cursor: pointer; 
+  flex-direction: column; 
+  gap: 4px; 
+}
 }
 .menu-btn span { display: block; width: 16px; height: 1.5px; background: var(--ink); }
 /* ── UPGRADED PREMIUM HERO ── */
